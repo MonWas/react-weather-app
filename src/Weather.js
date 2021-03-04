@@ -1,10 +1,11 @@
 import React, { useState} from "react";
-import FormattedDate from "./FormattedDate";
+import currentWeather from "./currentWeather";
 import axios from "axios";
 import "./Weather.css";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
+  const [city, setCity] = useState(props.defaultCity);
   function handleResponse(response) {
     setWeatherData({
       ready: true,
@@ -17,25 +18,29 @@ export default function Weather(props) {
     });
   }
 
+  function search() {
+    const apiKey = "efc805510f87eae6dd68397c12d4ef5f";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function handleCityChange(event) {
+    setCity(event.target.value);
+  }
+
   if (weatherData.ready) {
     return (
       <div className="container">
         <div className="wrapper">
           <div className="weather-app">
-            <div className="heading">
-              <h1>
-                <FormattedDate date={weatherData.date} />
-              </h1>
-              <h6 id="date">Last updated: {weatherData.date.getDay()}</h6>
-              <h6 className="text-capitalize" id="description">{weatherData.description}</h6>
-              <h1 className="temperature">{Math.round(weatherData.temperature)}</h1>
-              <div class="units">
-                <span className="active">°C</span> | <span>°F</span>
-              </div>
-              <img src="http://openweathermap.org/img/wn/03d@2x.png" alt="Scattered Clouds" />
-            </div>
+            <currentWeather data={weatherData} />
             <br />
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="row align-items-center">
                 <div className="col-3">
                   <button
@@ -67,6 +72,7 @@ export default function Weather(props) {
                     aria-label="Change location"
                     autocomplete="off"
                     autoFocus="on"
+                    onChange={handleCityChange}
                   />
                 </div>
                 <div className="col-3">
@@ -280,11 +286,7 @@ export default function Weather(props) {
       </div>
     );
   } else {
-    const apiKey = "efc805510f87eae6dd68397c12d4ef5f";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(handleResponse);
-
+    search();
     return "Loading...";
   }
-
 }
