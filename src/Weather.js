@@ -48,7 +48,7 @@ export default function Weather() {
                   placeholder="Change location"
                   aria-label="Change location"
                   autocomplete="off"
-                  autofocus="on"
+                  autoFocus="on"
                 />
               </div>
               <div className="col-3">
