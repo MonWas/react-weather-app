@@ -3,6 +3,7 @@ import CurrentWeather from "./CurrentWeather";
 import axios from "axios";
 import "./Weather.css";
 import HourlyForecast from "./HourlyForecast";
+import WeeklyForecast from "./WeeklyForecast";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
@@ -13,15 +14,18 @@ export default function Weather(props) {
       city: response.data.name,
       date: new Date(response.data.dt * 1000),
       description: response.data.weather[0].description,
+      feelsLike: Math.round(response.data.main.feels_like),
       humidity: response.data.main.humidity,
       icon: response.data.weather[0].icon,
+      maxTemperature: Math.round(response.data.main.temp_max),
+      minTemperature: Math.round(response.data.main.temp_min),
       temperature: response.data.main.temp,
-      wind: response.data.wind.speed,
+      wind: Math.round(response.data.wind.speed),
     });
   }
 
   function search() {
-    const apiKey = "efc805510f87eae6dd68397c12d4ef5f";
+    let apiKey = "efc805510f87eae6dd68397c12d4ef5f";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
   }
@@ -33,6 +37,19 @@ export default function Weather(props) {
 
   function handleCityChange(event) {
     setCity(event.target.value);
+  }
+
+  function getCurrentLocation(event) {
+    event.preventDefault();
+    navigator.geolocation.getCurrentPosition(searchLocation);
+  }
+
+  function searchLocation(position) {
+    let lon = position.coords.longitude;
+    let lat = position.coords.latitude;
+    let apiKey = "efc805510f87eae6dd68397c12d4ef5f";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
   }
 
   if (weatherData.ready) {
@@ -80,6 +97,7 @@ export default function Weather(props) {
                 <div className="col-3">
                   <button
                     className="btn btn-primary"
+                    onClick={getCurrentLocation}
                     type="submit"
                     value="Search"
                   >
@@ -102,6 +120,7 @@ export default function Weather(props) {
             <br />
             <HourlyForecast city={weatherData.city} />
             <br />
+            <WeeklyForecast city={weatherData.city} lon={weatherData.lon} lat={weatherData.lat} />
             <div className="card">
               <h5 className="card-header">Weekly Forecast</h5>
               <div className="card-body">

@@ -8,11 +8,6 @@
   width: 100%;
 }
 
-.WeatherIcon div img {
-  max-height: 50%;
-  max-width: 50%;
-}
-
 .weather-app {
   background-image: linear-gradient(to right, #74ebd5 0%, #9face6 100%);
   border: 1px solid #dadde1;
