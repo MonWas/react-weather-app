@@ -1,5 +1,5 @@
 import React, { useState} from "react";
-import currentWeather from "./currentWeather";
+import CurrentWeather from "./CurrentWeather";
 import axios from "axios";
 import "./Weather.css";
 
@@ -13,6 +13,7 @@ export default function Weather(props) {
       date: new Date(response.data.dt * 1000),
       description: response.data.weather[0].description,
       humidity: response.data.main.humidity,
+      icon: response.data.weather[0].icon,
       temperature: response.data.main.temp,
       wind: response.data.wind.speed,
     });
@@ -38,7 +39,7 @@ export default function Weather(props) {
       <div className="container">
         <div className="wrapper">
           <div className="weather-app">
-            <currentWeather data={weatherData} />
+            <CurrentWeather data={weatherData} />
             <br />
             <form onSubmit={handleSubmit}>
               <div className="row align-items-center">
