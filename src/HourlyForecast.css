@@ -1,0 +1,9 @@
+.HourlyForecast {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.HourlyForecast canvas {
+  display: block;
+  margin: 10px auto;
+}

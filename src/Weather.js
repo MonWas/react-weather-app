@@ -2,6 +2,7 @@ import React, { useState} from "react";
 import CurrentWeather from "./CurrentWeather";
 import axios from "axios";
 import "./Weather.css";
+import HourlyForecast from "./HourlyForecast";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
@@ -71,7 +72,7 @@ export default function Weather(props) {
                     type="text"
                     placeholder="Change location"
                     aria-label="Change location"
-                    autocomplete="off"
+                    autoComplete="off"
                     autoFocus="on"
                     onChange={handleCityChange}
                   />
@@ -99,43 +100,7 @@ export default function Weather(props) {
               </div>
             </form>
             <br />
-            <div className="card">
-              <h5 className="card-header">Today's Weather</h5>
-              <div className="card-body">
-                <div className="row align-items-center">
-                  <div className="col-2">
-                    <p>13:00</p>
-                    <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="" /><br />
-                    <p className="today">12°</p>
-                  </div>
-                  <div className="col-2">
-                    <p>16:00</p>
-                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" /><br />
-                    <p className="today">11°</p>
-                  </div>
-                  <div className="col-2">
-                    <p>19:00</p>
-                    <img src="http://openweathermap.org/img/wn/10n@2x.png" alt="" /><br />
-                    <p className="today">8°</p>
-                  </div>
-                  <div className="col-2">
-                    <p>22:00</p>
-                    <img src="http://openweathermap.org/img/wn/10n@2x.png" alt="" /><br />
-                    <p className="today">6°</p>
-                  </div>
-                  <div className="col-2">
-                    <p>01:00</p>
-                    <img src="http://openweathermap.org/img/wn/10n@2x.png" alt="" /><br />
-                    <p className="today">6°</p>
-                  </div>
-                  <div className="col-2">
-                    <p>04:00</p>
-                    <img src="http://openweathermap.org/img/wn/10n@2x.png" alt="" /><br />
-                    <p className="today">5°</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <HourlyForecast city={weatherData.city} />
             <br />
             <div className="card">
               <h5 className="card-header">Weekly Forecast</h5>
