@@ -13,9 +13,9 @@ export default function WeeklyForecast(props) {
 
   if (loaded && props.lat === forecast.lat && props.lon === forecast.lon) {
     return (
-      <div className="Weekly Forecast column">
-        {forecast.list.slice(0, 4).map(function (forecastItem) {
-          return <WeeklyForecastPreview data={forecastItem} />;
+      <div className="WeeklyForecast row-align-items-center">
+        {forecast.daily.slice(1, 7).map(function (forecastItem, index) {
+          return <WeeklyForecastPreview key={index} data={forecastItem} />
         })}
       </div>
     );

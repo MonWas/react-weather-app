@@ -17,10 +17,12 @@ export default function Weather(props) {
       feelsLike: Math.round(response.data.main.feels_like),
       humidity: response.data.main.humidity,
       icon: response.data.weather[0].icon,
+      lat: response.data.coord.lat,
+      lon: response.data.coord.lon,
       maxTemperature: Math.round(response.data.main.temp_max),
       minTemperature: Math.round(response.data.main.temp_min),
       temperature: response.data.main.temp,
-      wind: Math.round(response.data.wind.speed),
+      wind: Math.round(response.data.wind.speed)
     });
   }
 
@@ -48,7 +50,7 @@ export default function Weather(props) {
     let lon = position.coords.longitude;
     let lat = position.coords.latitude;
     let apiKey = "efc805510f87eae6dd68397c12d4ef5f";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
   }
 
@@ -121,59 +123,6 @@ export default function Weather(props) {
             <HourlyForecast city={weatherData.city} />
             <br />
             <WeeklyForecast city={weatherData.city} lon={weatherData.lon} lat={weatherData.lat} />
-            <div className="card">
-              <h5 className="card-header">Weekly Forecast</h5>
-              <div className="card-body">
-                <div className="row align-items-center">
-                  <div className="col-3"><strong>Friday</strong></div>
-                  <div className="col-3">
-                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" />
-                  </div>
-                  <div className="col-3 weekly"><strong>7°</strong></div>
-                  <div className="col-3 weekly">1°</div>
-                </div>
-                <div className="row align-items-center">
-                  <div className="col-3"><strong>Saturday</strong></div>
-                  <div className="col-3">
-                    <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="" />
-                  </div>
-                  <div className="col-3 weekly"><strong>4°</strong></div>
-                  <div className="col-3 weekly">0°</div>
-                </div>
-                <div className="row align-items-center">
-                  <div className="col-3"><strong>Sunday</strong></div>
-                  <div className="col-3">
-                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" />
-                  </div>
-                  <div className="col-3 weekly"><strong>10°</strong></div>
-                  <div className="col-3 weekly">4°</div>
-                </div>
-                <div className="row align-items-center">
-                  <div className="col-3"><strong>Monday</strong></div>
-                  <div className="col-3">
-                    <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="" />
-                  </div>
-                  <div className="col-3 weekly"><strong>8°</strong></div>
-                  <div className="col-3 weekly">0°</div>
-                </div>
-                <div className="row align-items-center">
-                  <div className="col-3"><strong>Tuesday</strong></div>
-                  <div className="col-3">
-                    <img src="http://openweathermap.org/img/wn/01d@2x.png" alt="" />
-                  </div>
-                  <div className="col-3 weekly"><strong>10°</strong></div>
-                  <div className="col-3 weekly">2°</div>
-                </div>
-                <div className="row align-items-center">
-                  <div className="col-3"><strong>Wednesday</strong></div>
-                  <div className="col-3">
-                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" />
-                  </div>
-                  <div className="col-3 weekly"><strong>10°</strong></div>
-                  <div className="col-3 weekly">7°</div>
-                </div>
-              </div>
-            </div>
             <br />
             <div className="card details">
               <h5 className="card-header">Details</h5>

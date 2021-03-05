@@ -1,0 +1,9 @@
+.WeeklyForecast {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.WeeklyForecast canvas {
+  display: block;
+  margin: 10px auto;
+}
