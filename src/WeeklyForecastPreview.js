@@ -1,6 +1,5 @@
 import React from "react";
 import WeatherIcon from "./WeatherIcon";
-import "./WeeklyForecast.css";
 import "./WeeklyForecastPreview.css";
 
 export default function WeeklyForecastPreview(props) {
@@ -22,10 +21,10 @@ export default function WeeklyForecastPreview(props) {
   }
 
   return (
-    <div className="row">
+    <div className="WeeklyForecastPreview row">
       {hours()}
       <WeatherIcon code={props.data.weather[0].icon} />
-      {maximumTemperature()}
+      {maximumTemperature()}{" | "}
       {minimumTemperature()}
     </div>
   );

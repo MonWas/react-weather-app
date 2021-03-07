@@ -7,8 +7,8 @@ export default function HourlyForecast(props) {
   const [forecast, setForecast] = useState(null);
 
   function handleHourlyForecast(response) {
-    setForecast(response.data);
     setLoaded(true);
+    setForecast(response.data);
   }
 
   if (loaded && props.city === forecast.city.name) {

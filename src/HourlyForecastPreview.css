@@ -1,10 +1,9 @@
-.WeeklyForecastPreview {
+.HourlyForecastPreview {
   align-items: baseline;
   background-color: rgba(115, 175, 224, 0.3);
   border-radius: 5px;
   box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
   display: flex;
-  flex-grow: 1;
   margin: 2px 5px;
   justify-content: space-evenly;
   padding: 5px;

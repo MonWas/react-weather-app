@@ -12,7 +12,7 @@ export default function CurrentWeather(props) {
       <h6 className="text-capitalize" id="description">{props.data.description}</h6>
       <WeatherTemperature celsius={props.data.temperature}/>
       <br />
-      <WeatherIcon code={props.data.icon} />
+      <span><WeatherIcon code={props.data.icon} /></span>
     </div>
   );
 }
