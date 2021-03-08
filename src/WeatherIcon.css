@@ -1,3 +1,7 @@
 .WeatherIcon {
   width: 100px;
 }
+
+div.WeatherIcon {
+  padding: 0;
+}

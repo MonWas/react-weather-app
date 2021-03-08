@@ -1,4 +1,4 @@
-.WeeklyForecastPreview {
+.DetailsPreview {
   align-items: baseline;
   background-color: rgba(115, 175, 224, 0.3);
   border-radius: 5px;
@@ -13,6 +13,7 @@
   border-radius: 5px;
   box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
   background-color: rgba(115, 175, 224, 0.3);
+  flex: 1 0;
   margin: 2px 5px;
   padding: 5px;
 }

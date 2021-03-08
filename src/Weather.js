@@ -4,10 +4,13 @@ import axios from "axios";
 import "./Weather.css";
 import HourlyForecast from "./HourlyForecast";
 import WeeklyForecast from "./WeeklyForecast";
+import Details from "./Details";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(props.defaultCity);
+  const [unit, setUnit] = useState("celsius");
+
   function handleResponse(response) {
     setWeatherData({
       ready: true,
@@ -15,15 +18,17 @@ export default function Weather(props) {
       date: new Date(response.data.dt * 1000),
       description: response.data.weather[0].description,
       feelsLike: Math.round(response.data.main.feels_like),
-      humidity: response.data.main.humidity,
+      humidity: response.data.main.humidty,
       icon: response.data.weather[0].icon,
       lat: response.data.coord.lat,
       lon: response.data.coord.lon,
       maxTemperature: Math.round(response.data.main.temp_max),
       minTemperature: Math.round(response.data.main.temp_min),
+      pressure: response.data.main.pressure,
       temperature: response.data.main.temp,
-      wind: Math.round(response.data.wind.speed)
+      wind: Math.round(response.data.wind.speed * 3.6)
     });
+
   }
 
   function search() {
@@ -59,7 +64,7 @@ export default function Weather(props) {
       <div className="container">
         <div className="wrapper">
           <div className="weather-app">
-            <CurrentWeather data={weatherData} />
+            <CurrentWeather data={weatherData} unit={unit} setUnit={setUnit} />
             <br />
             <form onSubmit={handleSubmit}>
               <div className="row align-items-center">
@@ -120,10 +125,11 @@ export default function Weather(props) {
               </div>
             </form>
             <br />
-            <HourlyForecast city={weatherData.city} />
+            <HourlyForecast city={weatherData.city} unit={unit} />
             <br />
-            <WeeklyForecast city={weatherData.city} lon={weatherData.lon} lat={weatherData.lat} />
+            <WeeklyForecast city={weatherData.city} lon={weatherData.lon} lat={weatherData.lat} unit={unit} />
             <br />
+            <Details city={weatherData.city} lon={weatherData.lon} lat={weatherData.lat} unit={unit} />
             <div className="card details">
               <h5 className="card-header">Details</h5>
               <div className="card-body">
@@ -131,13 +137,13 @@ export default function Weather(props) {
                   <div className="col-6">
                     CLOUDINESS<br />
                     <p>
-                      <strong>40<span></span>%</strong>
+                      <strong><span></span>%</strong>
                     </p>
                   </div>
                   <div className="col-6">
                     DEW POINT<br />
                     <p>
-                      <strong>0<span></span>°</strong>
+                      <strong><span></span>°</strong>
                     </p>
                   </div>
                 </div>
@@ -149,7 +155,7 @@ export default function Weather(props) {
                   <div className="col-6">
                     FEELS LIKE<br />
                     <p>
-                      <strong>7<span></span>°</strong>
+                      <strong>{weatherData.feelsLike}<span></span>°</strong>
                     </p>
                   </div>
                   <div className="col-6">
@@ -167,13 +173,13 @@ export default function Weather(props) {
                   <div className="col-6">
                     PRESSURE<br />
                     <p>
-                      <strong>1022<span></span> hPa</strong>
+                      <strong>{weatherData.pressure}<span></span> hPa</strong>
                     </p>
                   </div>
                   <div className="col-6">
                     SUNRISE<br />
                     <p>
-                      <strong>07:00<span></span></strong>
+                      <strong><span></span></strong>
                     </p>
                   </div>
                 </div>
@@ -185,13 +191,13 @@ export default function Weather(props) {
                   <div className="col-6">
                     SUNSET<br />
                     <p>
-                      <strong>18:14<span></span></strong>
+                      <strong><span></span></strong>
                     </p>
                   </div>
                   <div className="col-6">
                     UV INDEX<br />
                     <p>
-                      <strong>2<span></span></strong>
+                      <strong><span></span></strong>
                     </p>
                   </div>
                 </div>
@@ -203,13 +209,13 @@ export default function Weather(props) {
                   <div className="col-6">
                     VISIBILITY<br />
                     <p>
-                      <strong>10<span></span> km</strong>
+                      <strong><span></span> km</strong>
                     </p>
                   </div>
                   <div className="col-6">
                     WIND<br />
                     <p>
-                      <strong>{Math.round(weatherData.wind)}<span></span> km/h</strong>
+                      <strong>{weatherData.wind}<span></span> km/h</strong>
                     </p>
                   </div>
                 </div>

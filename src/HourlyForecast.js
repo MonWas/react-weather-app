@@ -7,15 +7,15 @@ export default function HourlyForecast(props) {
   const [forecast, setForecast] = useState(null);
 
   function handleHourlyForecast(response) {
-    setLoaded(true);
     setForecast(response.data);
+    setLoaded(true);
   }
 
   if (loaded && props.city === forecast.city.name) {
     return (
       <div className="HourlyForecast row">
         {forecast.list.slice(0, 4).map(function (forecastItem) {
-          return <HourlyForecastPreview data={forecastItem} />;
+          return <HourlyForecastPreview data={forecastItem} unit={props.unit} />;
         })}
       </div>
     );

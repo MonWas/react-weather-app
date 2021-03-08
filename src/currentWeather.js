@@ -10,7 +10,7 @@ export default function CurrentWeather(props) {
       <h1>{props.data.city}</h1>
       <h6><FormattedDate date={props.data.date} /></h6>
       <h6 className="text-capitalize" id="description">{props.data.description}</h6>
-      <WeatherTemperature celsius={props.data.temperature}/>
+      <WeatherTemperature celsius={props.data.temperature} unit={props.unit} setUnit={props.setUnit} />
       <br />
       <span><WeatherIcon code={props.data.icon} /></span>
     </div>

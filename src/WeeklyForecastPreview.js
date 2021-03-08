@@ -20,12 +20,33 @@ export default function WeeklyForecastPreview(props) {
     return `${minTemperature}°`;
   }
 
-  return (
-    <div className="WeeklyForecastPreview row">
-      {hours()}
-      <WeatherIcon code={props.data.weather[0].icon} />
-      {maximumTemperature()}{" | "}
-      {minimumTemperature()}
-    </div>
-  );
+  function maximumTemperatureFahrenheit() {
+    let maxTemperature = Math.round((props.data.temp.max * 9) / 5 + 32);
+    return `${maxTemperature}°`;
+  }
+
+  function minimumTemperatureFahrenheit() {
+    let minTemperature = Math.round((props.data.temp.min * 9) / 5 + 32);
+    return `${minTemperature}°`;
+  }
+
+  if (props.unit === "celsius") {
+    return (
+      <div className="WeeklyForecastPreview row">
+        {hours()}
+        <WeatherIcon code={props.data.weather[0].icon} />
+        {maximumTemperature()}{" | "}
+        {minimumTemperature()}
+      </div>
+    );
+  } else {
+    return (
+      <div className="WeeklyForecastPreview row">
+        {hours()}
+        <WeatherIcon code={props.data.weather[0].icon} />
+        {maximumTemperatureFahrenheit()}{" | "}
+        {minimumTemperatureFahrenheit()}
+      </div>
+    );
+  }
 }
