@@ -1,4 +1,5 @@
 import React from "react";
+import "./Details.css";
 
 export default function DetailsPreview(props) {
   function cloudiness() {
@@ -77,10 +78,10 @@ export default function DetailsPreview(props) {
   if (props.unit === "celsius") {
     return (
       <div className="DetailsPreview col">
-        <div>Cloudiness<br /><strong>{cloudiness()}</strong></div>
-        <div>Dew Point<br /><strong>{dewPoint()}</strong></div>
-        <div>{uvIndex()}{" "}</div>
-        <div>{visibility()}</div>
+        <div className="col-3">Cloudiness<br /><strong>{cloudiness()}</strong></div>
+        <div className="col-3">Dew Point<br /><strong>{dewPoint()}</strong></div>
+        <div className="col-3">UV Index<br /><strong>{uvIndex()}</strong></div>
+        <div className="col-3">Visibility<br /><strong>{visibility()}</strong></div>
       </div>
     );
   } else {

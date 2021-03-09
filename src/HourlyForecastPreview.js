@@ -12,17 +12,17 @@ export default function HourlyForecastPreview(props) {
   if (props.unit === "celsius") {
     return (
       <div className="HourlyForecastPreview col">
-        {hours()}
+        <strong>{hours()}</strong>
         <WeatherIcon code={props.data.weather[0].icon} />
-        {Math.round(props.data.main.temp)}°
+        <strong>{Math.round(props.data.main.temp)}°</strong>
       </div>
     );
   } else {
     return (
       <div className="HourlyForecastPreview col">
-        {hours()}
+        <strong>{hours()}</strong>
         <WeatherIcon code={props.data.weather[0].icon} />
-        {Math.round((props.data.main.temp * 9) / 5 + 32)}°
+        <strong>{Math.round((props.data.main.temp * 9) / 5 + 32)}°</strong>
       </div>
     );
   }

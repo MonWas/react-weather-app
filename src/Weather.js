@@ -5,11 +5,13 @@ import "./Weather.css";
 import HourlyForecast from "./HourlyForecast";
 import WeeklyForecast from "./WeeklyForecast";
 import Details from "./Details";
+import FormattedTime from "./FormattedTime";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(props.defaultCity);
   const [unit, setUnit] = useState("celsius");
+  const [backgroundImage, setBackgroundImage] = useState("");
 
   function handleResponse(response) {
     setWeatherData({
@@ -18,16 +20,22 @@ export default function Weather(props) {
       date: new Date(response.data.dt * 1000),
       description: response.data.weather[0].description,
       feelsLike: Math.round(response.data.main.feels_like),
-      humidity: response.data.main.humidty,
+      humidity: response.data.main.humidity,
       icon: response.data.weather[0].icon,
       lat: response.data.coord.lat,
       lon: response.data.coord.lon,
       maxTemperature: Math.round(response.data.main.temp_max),
       minTemperature: Math.round(response.data.main.temp_min),
       pressure: response.data.main.pressure,
+      sunrise: new Date(response.data.sys.sunrise * 1000),
+      sunset: new Date(response.data.sys.sunset * 1000),
       temperature: response.data.main.temp,
       wind: Math.round(response.data.wind.speed * 3.6)
     });
+
+    if (response.data.weather[0].main === "Clear") {
+      setBackgroundImage("clear");
+    }
 
   }
 
@@ -63,14 +71,14 @@ export default function Weather(props) {
     return (
       <div className="container">
         <div className="wrapper">
-          <div className="weather-app">
+          <div className={`weather-app ${backgroundImage}`}>
             <CurrentWeather data={weatherData} unit={unit} setUnit={setUnit} />
             <br />
-            <form onSubmit={handleSubmit}>
+            <form>
               <div className="row align-items-center">
                 <div className="col-3">
                   <button
-                    type="submit"
+                    onClick={getCurrentLocation}
                     className="btn btn-primary"
                   >
                     <svg
@@ -104,7 +112,7 @@ export default function Weather(props) {
                 <div className="col-3">
                   <button
                     className="btn btn-primary"
-                    onClick={getCurrentLocation}
+                    onClick={handleSubmit}
                     type="submit"
                     value="Search"
                   >
@@ -179,7 +187,7 @@ export default function Weather(props) {
                   <div className="col-6">
                     SUNRISE<br />
                     <p>
-                      <strong><span></span></strong>
+                      <FormattedTime time={weatherData.sunrise} />
                     </p>
                   </div>
                 </div>
@@ -191,7 +199,7 @@ export default function Weather(props) {
                   <div className="col-6">
                     SUNSET<br />
                     <p>
-                      <strong><span></span></strong>
+                      <FormattedTime time={weatherData.sunset} />
                     </p>
                   </div>
                   <div className="col-6">

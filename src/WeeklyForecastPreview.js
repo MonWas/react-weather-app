@@ -3,7 +3,7 @@ import WeatherIcon from "./WeatherIcon";
 import "./WeeklyForecastPreview.css";
 
 export default function WeeklyForecastPreview(props) {
-  function hours() {
+  function day() {
     let now = new Date(props.data.dt * 1000);
     let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     let day = days[now.getDay()];
@@ -33,19 +33,21 @@ export default function WeeklyForecastPreview(props) {
   if (props.unit === "celsius") {
     return (
       <div className="WeeklyForecastPreview row">
-        {hours()}
-        <WeatherIcon code={props.data.weather[0].icon} />
-        {maximumTemperature()}{" | "}
-        {minimumTemperature()}
+        <div className="col-4"><strong>{day()}</strong></div>
+        <div className="col-4"><WeatherIcon code={props.data.weather[0].icon} /></div>
+        <div className="col-4"><strong>{maximumTemperature()}</strong>
+        {" | "}
+        {minimumTemperature()}</div>
       </div>
     );
   } else {
     return (
       <div className="WeeklyForecastPreview row">
-        {hours()}
-        <WeatherIcon code={props.data.weather[0].icon} />
-        {maximumTemperatureFahrenheit()}{" | "}
-        {minimumTemperatureFahrenheit()}
+        <div className="col-4"><strong>{day()}</strong></div>
+        <div className="col-4"><WeatherIcon code={props.data.weather[0].icon} /></div>
+        <div className="col-4"><strong>{maximumTemperatureFahrenheit()}</strong>
+        {" | "}
+        {minimumTemperatureFahrenheit()}</div>
       </div>
     );
   }

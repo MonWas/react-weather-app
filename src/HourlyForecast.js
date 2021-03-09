@@ -14,8 +14,9 @@ export default function HourlyForecast(props) {
   if (loaded && props.city === forecast.city.name) {
     return (
       <div className="HourlyForecast row">
-        {forecast.list.slice(0, 4).map(function (forecastItem) {
-          return <HourlyForecastPreview data={forecastItem} unit={props.unit} />;
+        {forecast.list.slice(0, 4).map(function (forecastItem, index) {
+          return ( <HourlyForecastPreview key={index} data={forecastItem} unit={props.unit} />
+            );
         })}
       </div>
     );

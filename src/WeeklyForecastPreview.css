@@ -16,3 +16,7 @@
   margin: 2px 5px;
   padding: 5px;
 }
+
+.WeeklyForecastPreview .WeatherIcon {
+  margin: 0 auto;
+}

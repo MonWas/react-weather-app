@@ -2,3 +2,8 @@
   margin: 20px 0;
   text-align: center;
 }
+
+.Details canvas {
+  display: block;
+  margin: 10px auto;
+}
