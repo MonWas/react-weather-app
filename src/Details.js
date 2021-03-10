@@ -14,7 +14,7 @@ export default function Details(props) {
   if (loaded && props.lat === forecast.lat && props.lon === forecast.lon) {
     return (
       <div className="Details row">
-        <DetailsPreview data={forecast} unit={props.unit} />
+        <DetailsPreview data={forecast} unit={props.unit} weatherData={props.weatherData} />
       </div>
     );
   } else {
@@ -22,7 +22,7 @@ export default function Details(props) {
     let exclude = "exclude=hourly,minutely";
     let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${props.lat}&lon=${props.lon}&${exclude}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleDetails);
-
+    
     return null;
   }
 }

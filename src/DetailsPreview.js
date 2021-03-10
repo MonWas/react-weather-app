@@ -17,23 +17,23 @@ export default function DetailsPreview(props) {
     return `${dewPoint}°`;
   }
 
-  /*function feelsLike() {
-    let feelsLike = Math.round(props.data.main.feels_like);
+  function feelsLike() {
+    let feelsLike = props.weatherData.feelsLike;
     return `${feelsLike}°`;
   }
 
   function feelsLikeFahrenheit() {
-    let feelsLike = Math.round((props.data.main.feels_like * 9) / 5 + 32);
+    let feelsLike = (props.weatherData.feelsLike * 9) / 5 + 32;
     return `${feelsLike}°`;
   }
 
   function humidity() {
-    let humidity = (props.data.main.humidty);
+    let humidity = props.weatherData.humidity;
     return `${humidity}%`;
   }
 
   function pressure() {
-    let pressure = (props.data.main.pressure);
+    let pressure = props.weatherData.pressure;
     return `${pressure} hPa`
   }
 
@@ -48,17 +48,17 @@ export default function DetailsPreview(props) {
     minutes = `0${minutes}`;
   }
   return `${hours}:${minutes}`;
-}
+ }
 
   function sunrise() {
-    let sunrise = formatHours(props.data.sys.sunrise * 1000);
+    let sunrise = formatHours(props.weatherData.sunrise);
     return `${sunrise}`
   }
 
   function sunset() {
-    let sunset = formatHours(props.data.sys.sunset * 1000);
+    let sunset = formatHours(props.weatherData.sunset);
     return `${sunset}`
-  }*/
+  }
 
   function uvIndex() {
     let uvIndex = Math.round(props.data.current.uvi);
@@ -69,29 +69,161 @@ export default function DetailsPreview(props) {
     let visibility = props.data.current.visibility / 1000;
     return `${visibility} km`
   }
-/*
+
   function wind() {
-    let wind = Math.round(props.data.wind.speed * 3.6);
+    let wind = props.weatherData.wind;
     return `${wind} km/h`
-  }*/
+  }
 
   if (props.unit === "celsius") {
     return (
       <div className="DetailsPreview col">
-        <div className="col-3">Cloudiness<br /><strong>{cloudiness()}</strong></div>
-        <div className="col-3">Dew Point<br /><strong>{dewPoint()}</strong></div>
-        <div className="col-3">UV Index<br /><strong>{uvIndex()}</strong></div>
-        <div className="col-3">Visibility<br /><strong>{visibility()}</strong></div>
+        <div className="row align-items-center">
+          <div className="col-6">
+            CLOUDINESS<br />
+            <p>
+              <strong>{cloudiness()}<span></span></strong>
+            </p>
+          </div>
+          <div className="col-6">
+            DEW POINT<br />
+            <p>
+              <strong>{dewPoint()}<span></span></strong>
+            </p>
+          </div>
+        </div>
+        <div className="row align-items-center">
+          <div className="col-6">
+            FEELS LIKE<br />
+            <p>
+              <strong>{feelsLike()}<span></span></strong>
+            </p>
+          </div>
+          <div className="col-6">
+            HUMIDITY<br />
+            <p>
+              <strong>{humidity()}<span></span></strong>
+            </p>
+          </div>
+        </div>
+        <div className="row align-items-center">
+          <div className="col-6">
+            PRESSURE<br />
+            <p>
+              <strong>{pressure()}<span></span></strong>
+            </p>
+          </div>
+          <div className="col-6">
+            SUNRISE<br />
+            <p>
+              <strong>{sunrise()}<span></span></strong>
+            </p>
+          </div>
+        </div>
+        <div className="row align-items-center">
+          <div className="col-6">
+            SUNSET<br />
+            <p>
+              <strong>{sunset()}<span></span></strong>
+            </p>
+          </div>
+          <div className="col-6">
+            UV INDEX<br />
+            <p>
+              <strong>{uvIndex()}<span></span></strong>
+            </p>
+          </div>
+        </div>
+        <div className="row align-items-center">
+          <div className="col-6">
+            VISIBILITY<br />
+            <p>
+              <strong>{visibility()}<span></span></strong>
+            </p>
+          </div>
+          <div className="col-6">
+            WIND<br />
+            <p>
+              <strong>{wind()}<span></span></strong>
+            </p>
+          </div>
+        </div>
       </div>
     );
   } else {
-   return (
+    return (
       <div className="DetailsPreview col">
-        {cloudiness()}{" "}
-        {dewPointFahrenheit()}{" "}
-        {uvIndex()}{" "}
-        {visibility()}
-      </div>
+          <div className="row align-items-center">
+            <div className="col-6">
+              CLOUDINESS<br />
+              <p>
+                <strong>{cloudiness()}<span></span></strong>
+              </p>
+            </div>
+            <div className="col-6">
+              DEW POINT<br />
+              <p>
+                <strong>{dewPointFahrenheit()}<span></span></strong>
+              </p>
+            </div>
+          </div>
+          <div className="row align-items-center">
+            <div className="col-6">
+              FEELS LIKE<br />
+              <p>
+                <strong>{feelsLikeFahrenheit()}<span></span></strong>
+              </p>
+            </div>
+            <div className="col-6">
+              HUMIDITY<br />
+              <p>
+                <strong>{humidity()}<span></span></strong>
+              </p>
+            </div>
+          </div>
+          <div className="row align-items-center">
+            <div className="col-6">
+              PRESSURE<br />
+              <p>
+                <strong>{pressure()}<span></span></strong>
+              </p>
+            </div>
+            <div className="col-6">
+              SUNRISE<br />
+              <p>
+                <strong>{sunrise()}<span></span></strong>
+              </p>
+            </div>
+          </div>
+          <div className="row align-items-center">
+            <div className="col-6">
+              SUNSET<br />
+              <p>
+                <strong>{sunset()}<span></span></strong>
+              </p>
+            </div>
+            <div className="col-6">
+              UV INDEX<br />
+              <p>
+                <strong>{uvIndex()}<span></span></strong>
+              </p>
+            </div>
+          </div>
+          <div className="row align-items-center">
+            <div className="col-6">
+              VISIBILITY<br />
+              <p>
+                <strong>{visibility()}<span></span></strong>
+              </p>
+            </div>
+            <div className="col-6">
+              WIND<br />
+              <p>
+                <strong>{wind()}<span></span></strong>
+              </p>
+            </div>
+          </div>
+        </div>
     );
   }
 }

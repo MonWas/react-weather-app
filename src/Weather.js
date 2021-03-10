@@ -1,11 +1,10 @@
 import React, { useState} from "react";
-import CurrentWeather from "./CurrentWeather";
+import CurrentWeather from "./currentWeather";
 import axios from "axios";
 import "./Weather.css";
 import HourlyForecast from "./HourlyForecast";
 import WeeklyForecast from "./WeeklyForecast";
 import Details from "./Details";
-import FormattedTime from "./FormattedTime";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
@@ -32,9 +31,15 @@ export default function Weather(props) {
       temperature: response.data.main.temp,
       wind: Math.round(response.data.wind.speed * 3.6)
     });
-
+    
     if (response.data.weather[0].main === "Clear") {
       setBackgroundImage("clear");
+    } else if (response.data.weather[0].main === "Clouds") {
+      setBackgroundImage("clouds");
+    } else if (response.data.weather[0].main === "Rain") {
+      setBackgroundImage("rain");
+    } else {
+      setBackgroundImage("snow");
     }
 
   }
@@ -74,7 +79,7 @@ export default function Weather(props) {
           <div className={`weather-app ${backgroundImage}`}>
             <CurrentWeather data={weatherData} unit={unit} setUnit={setUnit} />
             <br />
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="row align-items-center">
                 <div className="col-3">
                   <button
@@ -112,7 +117,6 @@ export default function Weather(props) {
                 <div className="col-3">
                   <button
                     className="btn btn-primary"
-                    onClick={handleSubmit}
                     type="submit"
                     value="Search"
                   >
@@ -137,98 +141,7 @@ export default function Weather(props) {
             <br />
             <WeeklyForecast city={weatherData.city} lon={weatherData.lon} lat={weatherData.lat} unit={unit} />
             <br />
-            <Details city={weatherData.city} lon={weatherData.lon} lat={weatherData.lat} unit={unit} />
-            <div className="card details">
-              <h5 className="card-header">Details</h5>
-              <div className="card-body">
-                <div className="row align-items-center">
-                  <div className="col-6">
-                    CLOUDINESS<br />
-                    <p>
-                      <strong><span></span>%</strong>
-                    </p>
-                  </div>
-                  <div className="col-6">
-                    DEW POINT<br />
-                    <p>
-                      <strong><span></span>°</strong>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="card details">
-              <div className="card-body">
-                <div className="row align-items-center">
-                  <div className="col-6">
-                    FEELS LIKE<br />
-                    <p>
-                      <strong>{weatherData.feelsLike}<span></span>°</strong>
-                    </p>
-                  </div>
-                  <div className="col-6">
-                    HUMIDITY<br />
-                    <p>
-                      <strong>{weatherData.humidity}<span></span>%</strong>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="card details">
-              <div className="card-body">
-                <div className="row align-items-center">
-                  <div className="col-6">
-                    PRESSURE<br />
-                    <p>
-                      <strong>{weatherData.pressure}<span></span> hPa</strong>
-                    </p>
-                  </div>
-                  <div className="col-6">
-                    SUNRISE<br />
-                    <p>
-                      <FormattedTime time={weatherData.sunrise} />
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="card details">
-              <div className="card-body">
-                <div className="row align-items-center">
-                  <div className="col-6">
-                    SUNSET<br />
-                    <p>
-                      <FormattedTime time={weatherData.sunset} />
-                    </p>
-                  </div>
-                  <div className="col-6">
-                    UV INDEX<br />
-                    <p>
-                      <strong><span></span></strong>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="card details">
-              <div className="card-body">
-                <div className="row align-items-center">
-                  <div className="col-6">
-                    VISIBILITY<br />
-                    <p>
-                      <strong><span></span> km</strong>
-                    </p>
-                  </div>
-                  <div className="col-6">
-                    WIND<br />
-                    <p>
-                      <strong>{weatherData.wind}<span></span> km/h</strong>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Details city={weatherData.city} lon={weatherData.lon} lat={weatherData.lat} unit={unit} weatherData={weatherData}/>
           </div>
         </div>
       </div>
