@@ -38,8 +38,12 @@ export default function Weather(props) {
       setBackgroundImage("clouds");
     } else if (response.data.weather[0].main === "Rain") {
       setBackgroundImage("rain");
-    } else {
+    } else if (response.data.weather[0].main === "Snow") {
       setBackgroundImage("snow");
+    } else if (response.data.weather[0].main === "Thunderstorm") {
+      setBackgroundImage("thunderstorm");
+    } else {
+      setBackgroundImage("drizzle");
     }
 
   }

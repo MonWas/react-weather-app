@@ -80,13 +80,13 @@ export default function DetailsPreview(props) {
       <div className="DetailsPreview col">
         <div className="row align-items-center">
           <div className="col-6">
-            CLOUDINESS<br />
+            Cloudiness<br />
             <p>
               <strong>{cloudiness()}<span></span></strong>
             </p>
           </div>
           <div className="col-6">
-            DEW POINT<br />
+            Dew Point<br />
             <p>
               <strong>{dewPoint()}<span></span></strong>
             </p>
@@ -94,13 +94,13 @@ export default function DetailsPreview(props) {
         </div>
         <div className="row align-items-center">
           <div className="col-6">
-            FEELS LIKE<br />
+            Feels Like<br />
             <p>
               <strong>{feelsLike()}<span></span></strong>
             </p>
           </div>
           <div className="col-6">
-            HUMIDITY<br />
+            Humidity<br />
             <p>
               <strong>{humidity()}<span></span></strong>
             </p>
@@ -108,13 +108,13 @@ export default function DetailsPreview(props) {
         </div>
         <div className="row align-items-center">
           <div className="col-6">
-            PRESSURE<br />
+            Pressure<br />
             <p>
               <strong>{pressure()}<span></span></strong>
             </p>
           </div>
           <div className="col-6">
-            SUNRISE<br />
+            Sunrise<br />
             <p>
               <strong>{sunrise()}<span></span></strong>
             </p>
@@ -122,13 +122,13 @@ export default function DetailsPreview(props) {
         </div>
         <div className="row align-items-center">
           <div className="col-6">
-            SUNSET<br />
+            Sunset<br />
             <p>
               <strong>{sunset()}<span></span></strong>
             </p>
           </div>
           <div className="col-6">
-            UV INDEX<br />
+            UV Index<br />
             <p>
               <strong>{uvIndex()}<span></span></strong>
             </p>
@@ -136,13 +136,13 @@ export default function DetailsPreview(props) {
         </div>
         <div className="row align-items-center">
           <div className="col-6">
-            VISIBILITY<br />
+            Visibility<br />
             <p>
               <strong>{visibility()}<span></span></strong>
             </p>
           </div>
           <div className="col-6">
-            WIND<br />
+            Wind<br />
             <p>
               <strong>{wind()}<span></span></strong>
             </p>
