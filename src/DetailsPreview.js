@@ -23,7 +23,7 @@ export default function DetailsPreview(props) {
   }
 
   function feelsLikeFahrenheit() {
-    let feelsLike = (props.weatherData.feelsLike * 9) / 5 + 32;
+    let feelsLike = Math.round((props.weatherData.feelsLike * 9) / 5 + 32);
     return `${feelsLike}°`;
   }
 
@@ -70,9 +70,19 @@ export default function DetailsPreview(props) {
     return `${visibility} km`
   }
 
+  function visibilityFahrenheit() {
+    let visibility = Math.round(props.data.current.visibility / 1.609);
+    return `${visibility} mi`
+  }
+
   function wind() {
     let wind = props.weatherData.wind;
     return `${wind} km/h`
+  }
+
+  function windFahrenheit() {
+    let wind = Math.round(props.weatherData.wind / 1.609);
+    return `${wind} mph`
   }
 
   if (props.unit === "celsius") {
@@ -213,13 +223,13 @@ export default function DetailsPreview(props) {
             <div className="col-6">
               VISIBILITY<br />
               <p>
-                <strong>{visibility()}<span></span></strong>
+                <strong>{visibilityFahrenheit()}<span></span></strong>
               </p>
             </div>
             <div className="col-6">
               WIND<br />
               <p>
-                <strong>{wind()}<span></span></strong>
+                <strong>{windFahrenheit()}<span></span></strong>
               </p>
             </div>
           </div>
