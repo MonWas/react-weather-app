@@ -71,7 +71,7 @@ export default function DetailsPreview(props) {
   }
 
   function visibilityFahrenheit() {
-    let visibility = Math.round(props.data.current.visibility / 1.609);
+    let visibility = Math.round(props.data.current.visibility /1000 / 1.609);
     return `${visibility} mi`
   }
 
